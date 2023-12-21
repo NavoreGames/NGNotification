@@ -4,24 +4,19 @@ using System;
 
 namespace NGNotification
 {
-	public class NGException : Exception, INGException
+	public class NGException : NGNotification
 	{
-		public Category Category { get; set; }
-		public string Header { get; set; }
-		public new string Message { get; set; }
-
 		public string Trace { get; set; }
-		public bool Crash { get; set; }
 
-		public NGException(Category category, string header, string message, string trace)
+		public NGException(string header, string message, string trace)
 		{
-			Category = category;
+			Category = Category.Error ;
 			Header = header;
 			Message = message;
 			Trace = trace;
 		}
-		public NGException(Category category, string header, string message) : this(category, header, message, "") { }
-		public NGException(Category category, string message) : this(category, "", message) { }
+		public NGException(string header, string message) : this(header, message, "") { }
+		public NGException(string message) : this("", message) { }
 
 	}
 }

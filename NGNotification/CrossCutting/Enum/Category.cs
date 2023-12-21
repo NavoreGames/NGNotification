@@ -8,10 +8,10 @@ namespace NGNotification.Enum
 	public class Category : NGEnums<Category>
 	{
 		public static readonly Category Log = new Category("Log");
+		public static readonly Category Message = new Category("Message");
 		public static readonly Category Information = new Category("Information");
 		public static readonly Category Warning = new Category("Warning");
 		public static readonly Category Error = new Category("Error");
-		public static readonly Category Fatal = new Category("Fatal");
 
 		public Category() : base() { }
 		public Category(object pObject) : base(pObject) { }
