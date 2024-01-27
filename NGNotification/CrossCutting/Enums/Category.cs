@@ -1,6 +1,6 @@
 ﻿using NGEnum;
 
-namespace NGNotification.Enum
+namespace NGNotification.Enums
 {
 	/// <summary>
 	/// ENUM PARA AS CATEGORIAS DAS NOTIFICAÇÕES

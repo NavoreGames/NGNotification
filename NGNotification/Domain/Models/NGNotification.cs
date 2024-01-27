@@ -1,8 +1,8 @@
 ﻿using System;
-using NGNotification.Enum;
-using NGNotification.Interface;
+using NGNotification.Enums;
+using NGNotification.Interfaces;
 
-namespace NGNotification
+namespace NGNotification.Models
 {
     public class NGNotification : Exception, INGNotification
     {

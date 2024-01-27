@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NGNotification.Extension
+namespace NGNotification.Extensions
 {
 	public static class Extension
 	{
