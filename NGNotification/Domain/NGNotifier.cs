@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using NGNotification.Interfaces;
 using NGNotification.Enums;
+using Models = NGNotification.Models;
 
-namespace NGNotification.Models
+namespace NGNotification
 {
     public static class NGNotifier
     {
@@ -41,7 +42,7 @@ namespace NGNotification.Models
 
         #region ///// ADDLOG /////
         public static void AddLog(string header, string message) =>
-            Add(new NGNotification() { Category = Category.Log, Header = header, Message = message });
+            Add(new Models.NGNotification() { Category = Category.Log, Header = header, Message = message });
         public static void AddLog(string message) =>
             AddLog("", message);
         public static T AddLog<T>(T ret, string header, string message)
@@ -59,7 +60,7 @@ namespace NGNotification.Models
 
         #region ///// ADDMESSAGE /////
         public static void AddMessage(string header, string message) =>
-            Add(new NGNotification() { Category = Category.Message, Header = header, Message = message });
+            Add(new Models.NGNotification() { Category = Category.Message, Header = header, Message = message });
         public static void AddMessage(string message) =>
             AddMessage("", message);
         public static T AddMessage<T>(T ret, string header, string message)
@@ -77,7 +78,7 @@ namespace NGNotification.Models
 
         #region ///// ADDINFORMATION /////
         public static void AddInformation(string header, string message) =>
-            Add(new NGNotification() { Category = Category.Information, Header = header, Message = message });
+            Add(new Models.NGNotification() { Category = Category.Information, Header = header, Message = message });
         public static void AddInformation(string message) =>
             AddInformation("", message);
         public static T AddInformation<T>(T ret, string header, string message)
@@ -95,7 +96,7 @@ namespace NGNotification.Models
 
         #region ///// ADDWARNING /////
         public static void AddWarning(string header, string message) =>
-            Add(new NGNotification() { Category = Category.Warning, Header = header, Message = message });
+            Add(new Models.NGNotification() { Category = Category.Warning, Header = header, Message = message });
         public static void AddWarning(string message) =>
             AddWarning("", message);
         public static T AddWarning<T>(T ret, string header, string message)
@@ -113,7 +114,7 @@ namespace NGNotification.Models
 
         #region ///// ADDERROR /////
         public static void AddError(string header, string message) =>
-            Add(new NGNotification() { Category = Category.Error, Header = header, Message = message });
+            Add(new Models.NGNotification() { Category = Category.Error, Header = header, Message = message });
         public static void AddError(string message) =>
             AddError("", message);
         public static T AddError<T>(T ret, string header, string message)

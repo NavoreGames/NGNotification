@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using NGNotification.Interfaces;
 
-namespace NGNotification.Models
+namespace NGNotification
 {
     public class NGResponse
     {
