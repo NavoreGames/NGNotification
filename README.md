@@ -18,6 +18,7 @@ NGNotifier.HasNotifications
 ```
 
 Há vários métodos para adicionar mensagens.
+
 Para adicionar notificações simples, usar o método add:
 ```ruby
 public class NomeDoSeuEnum : NGEnums<NomeDoSeuEnum>
