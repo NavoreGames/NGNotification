@@ -8,6 +8,13 @@
 
 # Documentação
 
+### Usings:
+
+```ruby
+using NGNotification;
+using NGNotification.Models;
+```
+
 ### Implementação NGNotifier:
 
 NGNotifier é a principal classe para controlar notificações, é uma classe estática que contém a lista de notificações e métodos para manipular essa lista.
