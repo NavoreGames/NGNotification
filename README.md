@@ -4,15 +4,21 @@
 - O pacote NGNotification contém estruturas para retorno de mensagens, notificações e exceções.
 
 ### Vantagens: 
--
+- 
 
 # Documentação
 
-### Implementação:
+### Implementação NGNotifier:
 
-Para criar seus enums, crie uma classe que herda da classe base(NGEnums) que contenha 3 construtores. 
+NGNotifier é a principal classe para controlar notificações, é uma classe estática que contém a lista de notificações e métodos para manipular essa lista.
 
-Cada atributo será uma chave do seu enum, eles serão declarados como readonly e o tipo é a própria classe,  como mostrado no exemplo abaixo:
+Se precisar verificar se existe alguma notificação, usar HasNotifications:
+```ruby
+NGNotifier.HasNotifications
+```
+
+Há vários métodos para adicionar mensagens.
+Para adicionar notificações simples, usar o método add:
 ```ruby
 public class NomeDoSeuEnum : NGEnums<NomeDoSeuEnum>
 {
