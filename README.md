@@ -4,7 +4,8 @@
 - O pacote NGNotification contém estruturas para retorno de mensagens, notificações e exceções.
 
 ### Vantagens: 
-- 
+- Ter estruturas prontas para notificações e retornos.
+- Simplificar a adição de mensagens e saidas de métodos após adição.
 
 # Documentação
 
