@@ -19,6 +19,7 @@ using NGNotification.Models;
 ### Implementação NGNotifier:
 
 NGNotifier é a principal classe para controlar notificações, é uma classe estática que contém a lista de notificações e métodos para manipular essa lista.
+
 Se precisar verificar se existe alguma notificação, usar HasNotifications:
 ```ruby
 NGNotifier.HasNotifications
@@ -86,4 +87,24 @@ public bool Validation(int number)
     return true;
 }
 ```
+Pode-se retornar qualquer objeto, basta tipar o retorno no método de retorno dinâmico.
 
+Os métodos auxiliares também tem sobregargas se retorno dinâmico.
+```ruby
+return NGNotifier.Add<bool>(false, new NGMessage(Category.Warning, "This is invalid"));
+
+return NGNotifier.AddLog<object>(new Log() { }, "Log", "Some to log");
+return NGNotifier.AddLog<object>(new Log() { }, "Some to log");
+
+return NGNotifier.AddMessage<string>("Return", "Message", "Some message");
+return NGNotifier.AddMessage<string>("Return", "Some message");
+
+return NGNotifier.AddInformation<string>("Return", "Information", "Some information");
+return NGNotifier.AddInformation<string>("Return", "Some information");
+
+return NGNotifier.AddWarning<bool>(true, "Warning", "Some warning");
+return NGNotifier.AddWarning<bool>(false, "Some warning");
+
+return NGNotifier.AddError<int>(-1, "Error", "Some error");
+return NGNotifier.AddError<int>(0, "Some error");
+```
