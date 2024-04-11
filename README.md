@@ -12,6 +12,7 @@
 
 ```ruby
 using NGNotification;
+using NGNotification.Enums;
 using NGNotification.Models;
 ```
 
@@ -26,185 +27,64 @@ NGNotifier.HasNotifications
 
 Há vários métodos para adicionar mensagens.
 
-Para adicionar notificações simples, usar o método add:
-```ruby
-public class NomeDoSeuEnum : NGEnums<NomeDoSeuEnum>
-{
-  public static readonly NomeDoSeuEnum ChaveDoEnum = new NomeDoSeuEnum("ChaveDoEnum");
-  public static readonly NomeDoSeuEnum OutraChave = new NomeDoSeuEnum("OutraChave");
+Para adicionar uma mensagem simples, usar o método add.
 
-  public NomeDoSeuEnum() : base() { }
-  public NomeDoSeuEnum(object pObject) : base(pObject) { }
-  public NomeDoSeuEnum(int pId, object pObject) : base(pId, pObject) { }
+O método exige um INGNotification como parâmetro, que pode ser um NGMessage, NGException ou qualquer estrutura costumizada que herdar a interface em questão.
+```ruby
+//// Método principal de inicialização com todos os parâmetros  //////////////
+NGNotifier.Add(new NGMessage(Category.Message, "Test message", "This is a message test"));
+//// Método principal de inicialização apenas com apenas a categoria e mensagem (envia header = "") //////////////
+NGNotifier.Add(new NGMessage(Category.Message, "This is a message test"));
+//// Método sobrecarga de inicialização apenas com cabeçalho e a mensagem (envia category = Category.None) //////////////
+NGNotifier.Add(new NGMessage("Test message", "This is a message test"));
+//// Método sobrecarga de inicialização apenas com apenas a mensagem (envia category = Category.None e header = "") //////////////
+NGNotifier.Add(new NGMessage(Category.Message, "Test message", "This is a message test"));
+//// Método principal de inicialização com cabeçalho e mensagem  //////////////
+NGNotifier.Add(new NGException("Test error", "This is a erros test"));
+//// Método sobrecarga de inicialização com apenas a mensagem (header = "")
+NGNotifier.Add(new NGException("This is a erros test"));
+```
+> [!NOTE]
+> Note que ao adicionar um NGException não necessita categoria pois o mesmo adiciona Category.Error como padrão.
+
+Existe também métodos que auxiliares que gategorizam a mensagem automatico:
+```ruby
+//// Método para adicionar NGMessage com Category.Log  //////////////
+NGNotifier.AddLog("Log test", "This is a log test");
+//// Método sobrecarga para adicionar NGMessage com Category.Log e mensagem//////////////
+NGNotifier.AddLog("This is a log test");
+
+//// Método para adicionar NGMessage com Category.Message  //////////////
+NGNotifier.AddMessage("Message test", "This is a message test");
+//// Método sobrecarga para adicionar NGMessage com Category.Message e mensagem//////////////
+NGNotifier.AddMessage("This is a message test");
+
+//// Método para adicionar NGMessage com Category.Information  //////////////
+NGNotifier.AddInformation("Information test", "This is a Information test");
+//// Método sobrecarga para adicionar NGMessage com Category.Log e mensagem//////////////
+NGNotifier.AddInformation("This is a Information test");
+
+//// Método para adicionar NGMessage com Category.Warning  //////////////
+NGNotifier.AddWarning("Warning test", "This is a Warning test");
+//// Método sobrecarga para adicionar NGMessage com Category.Warning e mensagem//////////////
+NGNotifier.AddWarning("This is a Warning test");
+
+//// Método para adicionar NGMessage com Category.Error  //////////////
+NGNotifier.AddError("Error test", "This is a Error test");
+//// Método sobrecarga para adicionar NGMessage com Category.Error e mensagem//////////////
+NGNotifier.AddError("This is a Error test");
+```
+
+Se precisar adicionar uma mensagem no notifier e retornar alguma existem métodos para isso.
+
+O exemplo abaixo é um método que faz uma validação, adiciona uma mensagem como um erro ou um aviso e sai retornando false
+```ruby
+public bool Validation(int number)
+{
+    if (number <= 0)
+        return NGNotifier.Add<bool>(false, new NGMessage(Category.Warning, "The nunber is invalid"));
+
+    return true;
 }
 ```
 
-Os atributos chaves podem ser declarados de algumas formas:
- - No primeiro exemplo será criado um id automático com o hash do objeto.
- - No segundo exemplo o id é declarado explicitamente. 
-```ruby
-  public static readonly NomeDoSeuEnum ChaveDoEnum = new NomeDoSeuEnum("ChaveDoEnum");
-  public static readonly NomeDoSeuEnum ChaveDoEnum = new NomeDoSeuEnum(1,"ChaveDoEnum");
-```
-
-  - Como o construtor aceita um objeto, poderia ser inserido um objeto qualquer como chave, como outra classe, um type ou até mesmo um enum tradicional.
-```ruby
-public class NomeDoSeuEnum : NGEnums<NomeDoSeuEnum>
-{
-  public static readonly NomeDoSeuEnum Classe1 = new NomeDoSeuEnum(typeof(Classe1);
-  public static readonly NomeDoSeuEnum Classe2 = new NomeDoSeuEnum(typeof(Classe2);
-
-  public NomeDoSeuEnum() : base(None) { }
-  public NomeDoSeuEnum(object pObject) : base(pObject) { }
-  public NomeDoSeuEnum(int pId, object pObject) : base(pId, pObject) { }
-}
-```
-
-Outra forma de criar um enum é herdar de outro enum já criado ao invés da base.
-```ruby
-public class HerdadoDeOutroEnum : NomeDoSeuEnum
-{
-  public static readonly NomeDoSeuEnum ChaveDoEnumHerdado = new NomeDoSeuEnum("ChaveDoEnumHerdado");
-  public static readonly NomeDoSeuEnum OutraChaveHerdado = new NomeDoSeuEnum("OutraChaveHerdado");
-}
-```
-> [!NOTE]
-> Note que as propriedades são do tipo do enum pai, e a classe não precisa de construtor.
-
-Como os enums podem ser herdados infinitamente, se necessário pode-se selar a classe para ela não poder ser mais herdada.
-```ruby
-public sealed class HerdadoDeOutroEnum : NomeDoSeuEnum
-{
-  public static readonly NomeDoSeuEnum ChaveDoEnumHerdado = new NomeDoSeuEnum("ChaveDoEnumHerdado");
-  public static readonly NomeDoSeuEnum OutraChaveHerdado = new NomeDoSeuEnum("OutraChaveHerdado");
-}
-```
-
-### Métodos de conversão:
-
-Os métodos de conversão são métodos get para acessar os atributos, inteiro, string e objeto
-```ruby
-NomeDoSeuEnum.ChaveDoEnum.ToInt();
-NomeDoSeuEnum.ChaveDoEnum.ToString();
-NomeDoSeuEnum.ChaveDoEnum.ToObject();
-```
-
-### Métodos de comparação:
-
-Para comparação simples do objeto pode-se usar os métodos de comparação padrão ==, !=, Equals(recomendado).
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.ChaveDoEnum;
-NomeDoSeuEnum objeto2 = NomeDoSeuEnum.OutraChave;
-
-if (objeto1 == objeto2)
-  Console.WriteLine("objeto é igual");
-if (objeto1 != objeto2)
-  Console.WriteLine("objeto é diferente");
-if (objeto1.Equals(objeto2))
-  Console.WriteLine("objeto é igual");
-
-//Saída:
-//  objeto é diferente
-```
-
-Para comparar somente as propriedades use os métodos:
-  - CompareId, para comparar somente o id do enum.
-  - CompareKey, para comparar a string.
-  - CompareObject, para comparar somente o objeto passado (funciona para string também se o objeto passado for uma chave string, mas recomendamos usar o CompareKey para tal comparação).
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.ChaveDoEnum;
-NomeDoSeuEnum objeto2 = NomeDoSeuEnum.ChaveDoEnum;
-
-if (objeto1.CompareId(objeto2.ToInt())
-  Console.WriteLine("o id do objeto é o igual");
-if (objeto1.CompareKey("ChaveDoEnum"))
-  Console.WriteLine("a chave do objeto é igual");
-if (objeto1.CompareObject("ChaveDoEnum"))
-  Console.WriteLine("o objeto do objeto é igual");
-
-//Saída:
-//  o id do objeto é o igual
-//  a chave do objeto é igual
-//  o objeto do objeto é igual
-```
-
-NGEnum também possibilita a criação de enums compostos, pode-se adicionar elementos em um objeto já criado usando o método Add
-> [!NOTE]
-> O método Add retorna um novo enum com os elementos adicionados, ele deve ser atribuído.
-> [!NOTE]
-> O id do enum composto será criado automaticamente.
-
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.ChaveDoEnum;
-objeto1 = objeto1.Add(NomeDoSeuEnum.OutraChave);
-
-Console.WriteLine(objeto1.ToString());
-
-//Saída:
-//  ChaveDoEnum|OutraChave
-```
-
-Também podemos criar um enum composto usando o método New.
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.New(NomeDoSeuEnum.ChaveDoEnum, NomeDoSeuEnum.OutraChave);
-
-Console.WriteLine(objeto1.ToString());
-
-//Saída:
-//  ChaveDoEnum|OutraChave
-```
-
-Para comparar enum composto use o método CompareExact.
-
-Ele irá comparar se o enum é exatamente o mesmo passado no parâmetro, os mesmos elementos na mesma ordem.
-> [!NOTE]
-> O método irá funcionar com enum simples, mas recomendamos usar apenas para enum composto.
-
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.New(NomeDoSeuEnum.ChaveDoEnum, NomeDoSeuEnum.OutraChave); 
-
-if (objeto1.CompareExact(NomeDoSeuEnum.ChaveDoEnum, NomeDoSeuEnum.OutraChave))
-  Console.WriteLine("o enum composto é igual");
-if (!objeto1.CompareExact(NomeDoSeuEnum.OutraChave, NomeDoSeuEnum.ChaveDoEnum))
-  Console.WriteLine("o enum composto é diferente");
-
-
-//Saída:
-//  o enum composto é igual
-//  o enum composto é diferente
-```
-
-Também podemos verificar se existem o elemento no enum composto usando o método CompareSome.
-Ele irá verificar se existe os elementos não importando a ordem.
-> [!NOTE]
-> O método irá funcionar com enum simples, mas recomendamos usar apenas para enum composto.
-
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.New(NomeDoSeuEnum.ChaveDoEnum, NomeDoSeuEnum.OutraChave); 
-
-if (objeto1.CompareSome(NomeDoSeuEnum.ChaveDoEnum))
-  Console.WriteLine("O elemento existe no enum");
-if (objeto1.CompareSome(NomeDoSeuEnum.OutraChave, NomeDoSeuEnum.ChaveDoEnum))
-  Console.WriteLine("Os elementos existem no enum");
-```
-
-Também podemos verificar se existem algum dos enums usando o método CompareAny.
-Ele irá verificar se existe qualquer dos elementos passados no parâmetro
-> [!NOTE]
-> O método irá funcionar com enum simples, mas recomendamos usar apenas para enum composto.
-
-```ruby
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.New(NomeDoSeuEnum.ChaveDoEnum, NomeDoSeuEnum.OutraChave);
-
-Console.WriteLine(objeto1.ToString());
-
-Saída: ChaveDoEnum|OutraChave
-
-
-NomeDoSeuEnum objeto1 = NomeDoSeuEnum.New(NomeDoSeuEnum.ChaveDoEnum); 
-
-if (objeto1.CompareAny(NomeDoSeuEnum.ChaveDoEnum))
-Console.WriteLine("Existe o enums");
-if (objeto1.CompareAny(NomeDoSeuEnum.OutraChave, NomeDoSeuEnum.ChaveDoEnum))
-Console.WriteLine("Existe algum dos enums");
-```
