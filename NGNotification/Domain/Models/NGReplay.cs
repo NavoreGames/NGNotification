@@ -2,7 +2,7 @@
 
 namespace NGNotification.Models
 {
-    public class NGReply : NGNotification
+    public class NGReply : NGMessage
     {
         public string Question { get; set; }
         public string Reply { get; set; }
@@ -17,5 +17,6 @@ namespace NGNotification.Models
         }
         public NGReply(string header, string message) : this(header, message, "") { }
         public NGReply(string message) : this("", message) { }
+        public NGReply() { }
     }
 }

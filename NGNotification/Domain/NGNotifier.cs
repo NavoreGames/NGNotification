@@ -37,12 +37,10 @@ namespace NGNotification
             Add(firstNotification, OtherNotifications);
             return ret;
         }
-        public static T Add<T>(INGNotification firstNotification, params INGNotification[] OtherNotifications) =>
-            Add<T>(default, firstNotification, OtherNotifications);
-
+       
         #region ///// ADDLOG /////
         public static void AddLog(string header, string message) =>
-            Add(new Models.NGNotification() { Category = Category.Log, Header = header, Message = message });
+            Add(new Models.NGMessage() { Category = Category.Log, Header = header, Message = message });
         public static void AddLog(string message) =>
             AddLog("", message);
         public static T AddLog<T>(T ret, string header, string message)
@@ -52,15 +50,11 @@ namespace NGNotification
         }
         public static T AddLog<T>(T ret, string message) =>
             AddLog(ret, "", message);
-        public static T AddLog<T>(string header, string message) =>
-            AddLog<T>(default, header, message);
-        public static T AddLog<T>(string message) =>
-            AddLog<T>(default, "", message);
         #endregion
 
         #region ///// ADDMESSAGE /////
         public static void AddMessage(string header, string message) =>
-            Add(new Models.NGNotification() { Category = Category.Message, Header = header, Message = message });
+            Add(new Models.NGMessage() { Category = Category.Message, Header = header, Message = message });
         public static void AddMessage(string message) =>
             AddMessage("", message);
         public static T AddMessage<T>(T ret, string header, string message)
@@ -70,15 +64,11 @@ namespace NGNotification
         }
         public static T AddMessage<T>(T ret, string message) =>
             AddMessage(ret, "", message);
-        public static T AddMessage<T>(string header, string message) =>
-            AddMessage<T>(default, header, message);
-        public static T AddMessage<T>(string message) =>
-            AddMessage<T>(default, "", message);
         #endregion
 
         #region ///// ADDINFORMATION /////
         public static void AddInformation(string header, string message) =>
-            Add(new Models.NGNotification() { Category = Category.Information, Header = header, Message = message });
+            Add(new Models.NGMessage() { Category = Category.Information, Header = header, Message = message });
         public static void AddInformation(string message) =>
             AddInformation("", message);
         public static T AddInformation<T>(T ret, string header, string message)
@@ -88,15 +78,11 @@ namespace NGNotification
         }
         public static T AddInformation<T>(T ret, string message) =>
             AddInformation(ret, "", message);
-        public static T AddInformation<T>(string header, string message) =>
-            AddInformation<T>(default, header, message);
-        public static T AddInformation<T>(string message) =>
-            AddInformation<T>(default, "", message);
         #endregion
 
         #region ///// ADDWARNING /////
         public static void AddWarning(string header, string message) =>
-            Add(new Models.NGNotification() { Category = Category.Warning, Header = header, Message = message });
+            Add(new Models.NGMessage() { Category = Category.Warning, Header = header, Message = message });
         public static void AddWarning(string message) =>
             AddWarning("", message);
         public static T AddWarning<T>(T ret, string header, string message)
@@ -106,15 +92,11 @@ namespace NGNotification
         }
         public static T AddWarning<T>(T ret, string message) =>
             AddWarning(ret, "", message);
-        public static T AddWarning<T>(string header, string message) =>
-            AddWarning<T>(default, header, message);
-        public static T AddWarning<T>(string message) =>
-            AddWarning<T>(default, "", message);
         #endregion
 
         #region ///// ADDERROR /////
         public static void AddError(string header, string message) =>
-            Add(new Models.NGNotification() { Category = Category.Error, Header = header, Message = message });
+            Add(new Models.NGMessage() { Category = Category.Error, Header = header, Message = message });
         public static void AddError(string message) =>
             AddError("", message);
         public static T AddError<T>(T ret, string header, string message)
@@ -124,10 +106,6 @@ namespace NGNotification
         }
         public static T AddError<T>(T ret, string message) =>
             AddError(ret, "", message);
-        public static T AddError<T>(string header, string message) =>
-            AddError<T>(default, header, message);
-        public static T AddError<T>(string message) =>
-            AddError<T>(default, "", message);
         #endregion
     }
 }

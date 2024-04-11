@@ -2,7 +2,7 @@
 
 namespace NGNotification.Models
 {
-    public class NGException : NGNotification
+    public class NGException : NGMessage
     {
         public string Trace { get; set; }
 
@@ -15,6 +15,7 @@ namespace NGNotification.Models
         }
         public NGException(string header, string message) : this(header, message, "") { }
         public NGException(string message) : this("", message) { }
+        public NGException() { }
 
     }
 }
