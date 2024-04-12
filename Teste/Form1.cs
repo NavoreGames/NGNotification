@@ -70,7 +70,6 @@ namespace Teste
             //return NGNotifier.AddError<int>(-1, "Error", "Some error");
             //return NGNotifier.AddError<int>(0, "Some error");
 
-
         }
 
         public bool Validation(int number)
