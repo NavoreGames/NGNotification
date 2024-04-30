@@ -48,7 +48,7 @@ NGNotifier.Add(new NGException("This is a erros test"));
 > [!NOTE]
 > Note que ao adicionar um NGException não necessita categoria pois o mesmo adiciona Category.Error como padrão.
 
-Existe também métodos que auxiliares que gategorizam a mensagem automatico:
+Existe também métodos auxiliares que gategorizam a mensagem automatico:
 ```ruby
 //// Método para adicionar NGMessage com Category.Log  //////////////
 NGNotifier.AddLog("Log test", "This is a log test");
@@ -76,7 +76,7 @@ NGNotifier.AddError("Error test", "This is a Error test");
 NGNotifier.AddError("This is a Error test");
 ```
 
-Se precisar adicionar uma mensagem no notifier e retornar alguma existem métodos para isso.
+Se precisar adicionar uma mensagem no notifier e retornar alguma coisa, existem métodos para isso.
 
 O exemplo abaixo é um método que faz uma validação, adiciona uma mensagem como um erro ou um aviso e sai retornando false
 ```ruby
@@ -90,7 +90,7 @@ public bool Validation(int number)
 ```
 Pode-se retornar qualquer objeto, basta tipar o retorno no método de retorno dinâmico.
 
-Os métodos auxiliares também tem sobregargas se retorno dinâmico.
+Os métodos auxiliares também tem sobregargas com retorno dinâmico.
 ```ruby
 return NGNotifier.Add<bool>(false, new NGMessage(Category.Warning, "This is invalid"));
 
