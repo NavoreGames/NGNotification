@@ -117,6 +117,8 @@ NGNotifier.GetNotifications(false);
 ```
 > [!NOTE]
 > Por padrão o método limpa a lista de notificações.
+> 
 > Pode-se passar false no parâmetro para não limpar a lista.
+> 
 > Existe um método para limpar a lista manualmente.
 
