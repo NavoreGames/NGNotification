@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NGNotification.Interfaces;
 using NGNotification.Enums;
 using Models = NGNotification.Models;
+using System.Data;
 
 namespace NGNotification
 {
@@ -19,10 +20,13 @@ namespace NGNotification
             return Notifications;
         }
 
-        public static List<INGNotification> Return()
+        public static void Clear() { IsInitialize().Clear(); }
+        public static List<INGNotification> GetNotifications(bool clear = true)
         {
             List<INGNotification> retorno = new List<INGNotification>(IsInitialize());
-            Notifications.Clear();
+
+            if(clear)
+                Notifications.Clear();
 
             return retorno;
         }

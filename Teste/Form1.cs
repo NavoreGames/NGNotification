@@ -70,6 +70,10 @@ namespace Teste
             //return NGNotifier.AddError<int>(-1, "Error", "Some error");
             //return NGNotifier.AddError<int>(0, "Some error");
 
+            //// MÉTODO PARA PEGAR AS NOTIFICAÇÕES, POR PADRÃO O MÉTODO LIMPA A LISTA DE NOTIFICAÇÕES
+            //// PODE-SE PASSAR FALSE NO PARÂMETRO PARA NÃO LIMPAR EXISTE UM MÉTODO PARA LIMPAR A LISTA MANUALMENTE
+            NGNotifier.GetNotifications();
+
         }
 
         public bool Validation(int number)

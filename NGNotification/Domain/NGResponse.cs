@@ -30,7 +30,7 @@ namespace NGNotification
         public NGResponse(bool success) : this(success, null) { }
        
         public bool Success { get; private set; }
-        public int Code { get; private set; }
+        public int Code { get; private set; } 
         public List<INGNotification> Notifications { get; private set; }
         public object Data { get; private set; }
     }
