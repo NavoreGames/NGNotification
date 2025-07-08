@@ -109,3 +109,16 @@ return NGNotifier.AddWarning<bool>(false, "Some warning");
 return NGNotifier.AddError<int>(-1, "Error", "Some error");
 return NGNotifier.AddError<int>(0, "Some error");
 ```
+
+Para pegar as notificações usa=se o método GetNotifications.
+```ruby
+NGNotifier.GetNotifications();
+NGNotifier.GetNotifications(false);
+```
+> [!NOTE]
+> Por padrão o método limpa a lista de notificações.
+> 
+> Pode-se passar false no parâmetro para não limpar a lista.
+> 
+> Existe um método para limpar a lista manualmente.
+
